@@ -19,13 +19,13 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
         jPanel1 = new javax.swing.JPanel();
         jSlider1 = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnMissHeli = new javax.swing.JButton();
+        btnShtHeli = new javax.swing.JButton();
+        btnLOHeli = new javax.swing.JButton();
         textArea1 = new java.awt.TextArea();
-        jTextField1 = new javax.swing.JTextField();
+        txtFieldHeli = new javax.swing.JTextField();
         btnSndHeli = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        ChkBHeli = new javax.swing.JCheckBox();
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
@@ -48,31 +48,41 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
         jLabel1.setText("Area Not Cleard");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Missile Operation");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 187, 41));
+        btnMissHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnMissHeli.setText("Missile Operation");
+        jPanel1.add(btnMissHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 187, 41));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Shoot");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 187, 41));
+        btnShtHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnShtHeli.setText("Shoot");
+        jPanel1.add(btnShtHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 187, 41));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Laser Operation");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 187, 41));
+        btnLOHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLOHeli.setText("Laser Operation");
+        jPanel1.add(btnLOHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 187, 41));
         jPanel1.add(textArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 201, 666, 190));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 580, -1));
+        txtFieldHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(txtFieldHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 580, -1));
 
         btnSndHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSndHeli.setForeground(new java.awt.Color(0, 0, 0));
         btnSndHeli.setText("Send");
+        btnSndHeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSndHeliActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSndHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 430, 80, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("Position");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 109, -1, -1));
+        ChkBHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ChkBHeli.setForeground(new java.awt.Color(0, 0, 0));
+        ChkBHeli.setText("Position");
+        ChkBHeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkBHeliActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ChkBHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 109, -1, -1));
         jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 49, -1));
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 49, -1));
 
@@ -104,6 +114,21 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSndHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndHeliActionPerformed
+        String msg="Helicopter : "+txtFieldHeli.getText();
+        MainController.setDefenceMsg(msg);
+    }//GEN-LAST:event_btnSndHeliActionPerformed
+
+    private void ChkBHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkBHeliActionPerformed
+        if (ChkBHeli.isSelected()) {
+            updateButtons();
+        }else {
+            btnMissHeli.setEnabled(false);
+            btnShtHeli.setEnabled(false);
+            btnLOHeli.setEnabled(false);
+        }
+    }//GEN-LAST:event_ChkBHeliActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -114,11 +139,11 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox ChkBHeli;
+    private javax.swing.JButton btnLOHeli;
+    private javax.swing.JButton btnMissHeli;
+    private javax.swing.JButton btnShtHeli;
     private javax.swing.JButton btnSndHeli;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -127,8 +152,8 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
     private java.awt.TextArea textArea1;
+    private javax.swing.JTextField txtFieldHeli;
     // End of variables declaration//GEN-END:variables
 
     @Override

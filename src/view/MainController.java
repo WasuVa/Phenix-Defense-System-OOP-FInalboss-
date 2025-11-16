@@ -1,5 +1,8 @@
 package view;
 
+import javax.swing.text.*;
+import view.DefenceObserverableInterface;
+
 public class MainController extends javax.swing.JFrame {
     
     private final DefenceObserverableInterface defenceObserverbaleInterface;
@@ -23,14 +26,16 @@ public class MainController extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        textArea1 = new java.awt.TextArea();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         btnSndMain = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        textArea2 = new java.awt.TextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtPaneMC1 = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtPaneMC2 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -45,9 +50,6 @@ public class MainController extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Collect Information");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
-
-        textArea1.setEnabled(false);
-        jPanel1.add(textArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 360, 160));
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
@@ -75,8 +77,15 @@ public class MainController extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bakcImg.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 100));
 
-        textArea2.setEnabled(false);
-        jPanel1.add(textArea2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, 160));
+        txtPaneMC1.setEditable(false);
+        jScrollPane2.setViewportView(txtPaneMC1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, 160));
+
+        txtPaneMC2.setEditable(false);
+        jScrollPane3.setViewportView(txtPaneMC2);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 350, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +101,19 @@ public class MainController extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void updateInbox(){
+        txtPaneMC1.setText("");
+    }
+    
+    public static void setDefenceMsg(String msg){
+        try {
+            Document doc = txtPaneMC1.getDocument();
+            doc.insertString(doc.getLength(), msg + "\n", null);
+            txtPaneMC1.setCaretPosition(doc.getLength());
+        } catch (BadLocationException ex) {
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSndMain;
@@ -102,9 +123,11 @@ public class MainController extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jTextField1;
-    private java.awt.TextArea textArea1;
-    private java.awt.TextArea textArea2;
+    private javax.swing.JTextPane txtPaneMC1;
+    private javax.swing.JTextPane txtPaneMC2;
     // End of variables declaration//GEN-END:variables
 }
