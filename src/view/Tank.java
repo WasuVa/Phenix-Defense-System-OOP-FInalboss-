@@ -1,13 +1,28 @@
 package view;
 
-public class Tank extends javax.swing.JFrame implements DefenceObserver{
+import controller.Controller;
+import model.DefenseObserver;
 
-    public Tank() {
+public class Tank extends javax.swing.JFrame implements DefenseObserver{
+    
+    private Controller controller;
+    private MainController mainController;
+    private int soldirsCount;
+    private int ammo;
+    private int fuel = 100;
+    private boolean engineRunning;
+
+    public Tank(Controller controller, MainController mainController) {
         initComponents();
         setLocationRelativeTo(this);
-        setTitle("Tank");
-        setVisible(true);
-        setResizable(false);
+        this.controller = controller;
+        txtTank.setEditable(false);
+        this.mainController = mainController;
+        btnShoot.setEnabled(false);
+        btnMissile.setEnabled(false);
+        btnLaser.setEnabled(false);
+        btnRotate.setEnabled(false);
+        jSlider1.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -15,20 +30,20 @@ public class Tank extends javax.swing.JFrame implements DefenceObserver{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnLaser = new javax.swing.JButton();
         btnSndTnk = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        potion = new javax.swing.JCheckBox();
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        textArea1 = new java.awt.TextArea();
-        jButton2 = new javax.swing.JButton();
+        lblArea = new javax.swing.JLabel();
+        btnMissile = new javax.swing.JButton();
+        txtTank = new java.awt.TextArea();
+        btnShoot = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        btnRotate = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -37,19 +52,19 @@ public class Tank extends javax.swing.JFrame implements DefenceObserver{
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Laser Operation");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 187, 41));
+        btnLaser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLaser.setText("Laser Operation");
+        jPanel1.add(btnLaser, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 187, 41));
 
         btnSndTnk.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSndTnk.setForeground(new java.awt.Color(0, 0, 0));
         btnSndTnk.setText("Send");
         jPanel1.add(btnSndTnk, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 400, -1, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("Position");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
+        potion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        potion.setForeground(new java.awt.Color(0, 0, 0));
+        potion.setText("Position");
+        jPanel1.add(potion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
         jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 49, -1));
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 49, -1));
 
@@ -67,26 +82,26 @@ public class Tank extends javax.swing.JFrame implements DefenceObserver{
         jSlider1.setValue(0);
         jPanel1.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, 398));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Area Not Cleard");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
+        lblArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblArea.setForeground(new java.awt.Color(0, 0, 0));
+        lblArea.setText("Area Not Cleard");
+        jPanel1.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Missile Operation");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 187, 41));
-        jPanel1.add(textArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 228, 675, 160));
+        btnMissile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnMissile.setText("Missile Operation");
+        jPanel1.add(btnMissile, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 187, 41));
+        jPanel1.add(txtTank, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 228, 675, 160));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Shoot");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 187, 41));
+        btnShoot.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnShoot.setText("Shoot");
+        jPanel1.add(btnShoot, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 187, 41));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 595, -1));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton5.setText("Rotate Shooting");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 187, 41));
+        btnRotate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnRotate.setText("Rotate Shooting");
+        jPanel1.add(btnRotate, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 187, 41));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bakcImg.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 100));
@@ -105,45 +120,13 @@ public class Tank extends javax.swing.JFrame implements DefenceObserver{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tank().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLaser;
+    private javax.swing.JButton btnMissile;
+    private javax.swing.JButton btnRotate;
+    private javax.swing.JButton btnShoot;
     private javax.swing.JButton btnSndTnk;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -152,26 +135,76 @@ public class Tank extends javax.swing.JFrame implements DefenceObserver{
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTextField jTextField1;
-    private java.awt.TextArea textArea1;
+    private javax.swing.JLabel lblArea;
+    private javax.swing.JCheckBox potion;
+    private java.awt.TextArea txtTank;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void getMsgMain(String msg) {
-        
+    public void updateMessage(String message) {
+        txtTank.append(message + "\n");
     }
 
     @Override
-    public void update(int position) {
-        
+    public void clearArea(boolean clear) {
+        if (clear == true) {
+            lblArea.setText("Area Cleared");
+        } else {
+            lblArea.setText("Area Not Cleared");
+        }
     }
 
     @Override
-    public void areaClearLabel(boolean clear) {
-        
+    public void buttonEnable(int value) {
+        if (potion.isSelected() == true) {
+            jSlider1.setValue(value);
+            jLabel3.setText(value + "");
+            if (value >= 0 || 25 <= value) {
+                btnShoot.setEnabled(true);
+                btnMissile.setEnabled(false);
+                btnLaser.setEnabled(false);
+                btnRotate.setEnabled(false);
+            }
+            if (value >= 26 || 50 <= value) {
+                btnShoot.setEnabled(false);
+                btnMissile.setEnabled(true);
+                btnLaser.setEnabled(false);
+                btnRotate.setEnabled(false);
+            }
+
+            if (value >= 51 || 75 <= value) {
+                btnShoot.setEnabled(false);
+                btnMissile.setEnabled(false);
+                btnLaser.setEnabled(true);
+                btnRotate.setEnabled(false);
+            }
+
+            if (value >= 76) {
+                btnShoot.setEnabled(false);
+                btnMissile.setEnabled(false);
+                btnLaser.setEnabled(false);
+                btnRotate.setEnabled(true);
+            }
+        }
     }
 
-    @Override
-    public void updateButtons() {
-        
+    public String getSoldierCount() {
+        return soldirsCount + "";
+    }
+
+    public String getAmmoCount() {
+        return ammo + "";
+    }
+
+    public String getFuel() {
+        return fuel + "";
+    }
+
+    public String getPosition() {
+        return jSlider1.getValue() + "";
+    }
+
+    public void sendPrivateMessage(String message) {
+        txtTank.append(message + "\n");
     }
 }

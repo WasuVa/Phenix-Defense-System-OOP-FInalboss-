@@ -1,14 +1,21 @@
 package view;
 
-import java.awt.Color;
+import controller.Controller;
+import javax.swing.JOptionPane;
+import model.DefenseObserver;
 
-public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
 
-    public Helicopters() {
+public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
+    
+    private Controller controller;
+    private MainController mainController;
+    private int soldirsCount;
+    private int ammo;
+
+    public Helicopters(Controller controller, MainController mainController) {
         initComponents();
         setLocationRelativeTo(this);
         setTitle("Helicopter");
-        setVisible(true);
         setResizable(false);
     }
 
@@ -17,12 +24,12 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jSlider1 = new javax.swing.JSlider();
-        jLabel1 = new javax.swing.JLabel();
+        sliderHeli = new javax.swing.JSlider();
+        lblArea = new javax.swing.JLabel();
         btnMissHeli = new javax.swing.JButton();
         btnShtHeli = new javax.swing.JButton();
         btnLOHeli = new javax.swing.JButton();
-        textArea1 = new java.awt.TextArea();
+        MsgHeli = new java.awt.TextArea();
         txtFieldHeli = new javax.swing.JTextField();
         btnSndHeli = new javax.swing.JButton();
         ChkBHeli = new javax.swing.JCheckBox();
@@ -39,14 +46,14 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
-        jSlider1.setValue(0);
-        jPanel1.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 37, -1, 440));
+        sliderHeli.setOrientation(javax.swing.JSlider.VERTICAL);
+        sliderHeli.setValue(0);
+        jPanel1.add(sliderHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 37, -1, 440));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Area Not Cleard");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
+        lblArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblArea.setForeground(new java.awt.Color(0, 0, 0));
+        lblArea.setText("Area Not Cleard");
+        jPanel1.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
 
         btnMissHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMissHeli.setText("Missile Operation");
@@ -59,7 +66,7 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
         btnLOHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLOHeli.setText("Laser Operation");
         jPanel1.add(btnLOHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 187, 41));
-        jPanel1.add(textArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 201, 666, 190));
+        jPanel1.add(MsgHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 201, 666, 190));
 
         txtFieldHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel1.add(txtFieldHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 580, -1));
@@ -115,64 +122,84 @@ public class Helicopters extends javax.swing.JFrame implements DefenceObserver{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSndHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndHeliActionPerformed
-        String msg="Helicopter : "+txtFieldHeli.getText();
-        MainController.setDefenceMsg(msg);
+
     }//GEN-LAST:event_btnSndHeliActionPerformed
 
     private void ChkBHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkBHeliActionPerformed
-        if (ChkBHeli.isSelected()) {
-            updateButtons();
-        }else {
-            btnMissHeli.setEnabled(false);
-            btnShtHeli.setEnabled(false);
-            btnLOHeli.setEnabled(false);
-        }
+
     }//GEN-LAST:event_ChkBHeliActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Helicopters().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ChkBHeli;
+    private java.awt.TextArea MsgHeli;
     private javax.swing.JButton btnLOHeli;
     private javax.swing.JButton btnMissHeli;
     private javax.swing.JButton btnShtHeli;
     private javax.swing.JButton btnSndHeli;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private java.awt.TextArea textArea1;
+    private javax.swing.JLabel lblArea;
+    private javax.swing.JSlider sliderHeli;
     private javax.swing.JTextField txtFieldHeli;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void getMsgMain(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+@Override
+    public void updateMessage(String message) {
+        MsgHeli.append(message + "\n");
     }
 
     @Override
-    public void update(int position) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void clearArea(boolean clear) {
+        if (clear == true) {
+            lblArea.setText("Area Cleared");
+        } else {
+            lblArea.setText("Area Not Cleared");
+        }
     }
 
     @Override
-    public void areaClearLabel(boolean clear) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void buttonEnable(int value) {
+        if (ChkBHeli.isSelected() == true) {
+            sliderHeli.setValue(value);
+            lblArea.setText(value + "");
+            if (value >= 0 || 30 <= value) {
+                btnShtHeli.setEnabled(true);
+                btnMissHeli.setEnabled(false);
+                btnLOHeli.setEnabled(false);
+            }
+            if (value >= 31 || 60 <= value) {
+                btnLOHeli.setEnabled(true);
+                btnShtHeli.setEnabled(true);
+                btnMissHeli.setEnabled(false);
+            }
+
+            if (value >= 61) {
+                btnMissHeli.setEnabled(true);
+                btnLOHeli.setEnabled(true);
+                btnShtHeli.setEnabled(true);
+            }
+        }
     }
 
-    @Override
-    public void updateButtons() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getSoldierCount() {
+        return soldirsCount + "";
+    }
+
+    public String getAmmoCount() {
+        return ammo + "";
+    }
+
+    public String getPosition() {
+        return sliderHeli.getValue() + "";
+    }
+
+    public void sendPrivateMessage(String message) {
+        MsgHeli.append(message + "\n");
     }
 }
+    
