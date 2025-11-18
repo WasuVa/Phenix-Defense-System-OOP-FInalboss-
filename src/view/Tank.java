@@ -16,7 +16,6 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         initComponents();
         setLocationRelativeTo(this);
         this.controller = controller;
-        txtTank.setEditable(false);
         this.mainController = mainController;
         btnShoot.setEnabled(false);
         btnMissile.setEnabled(false);
@@ -42,7 +41,7 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         btnMissile = new javax.swing.JButton();
         txtTank = new java.awt.TextArea();
         btnShoot = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        Msgtank = new javax.swing.JTextField();
         btnRotate = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -59,6 +58,11 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         btnSndTnk.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSndTnk.setForeground(new java.awt.Color(0, 0, 0));
         btnSndTnk.setText("Send");
+        btnSndTnk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSndTnkActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSndTnk, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 400, -1, -1));
 
         potion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -96,8 +100,8 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         btnShoot.setText("Shoot");
         jPanel1.add(btnShoot, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 187, 41));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 595, -1));
+        Msgtank.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(Msgtank, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 595, -1));
 
         btnRotate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRotate.setText("Rotate Shooting");
@@ -110,7 +114,7 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,25 +124,11 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLaser;
-    private javax.swing.JButton btnMissile;
-    private javax.swing.JButton btnRotate;
-    private javax.swing.JButton btnShoot;
-    private javax.swing.JButton btnSndTnk;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblArea;
-    private javax.swing.JCheckBox potion;
-    private java.awt.TextArea txtTank;
-    // End of variables declaration//GEN-END:variables
+    private void btnSndTnkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndTnkActionPerformed
+        mainController.getHelicoperMessage(txtTank.getText());
+        txtTank.append(Msgtank.getText()+"\n");
+        txtTank.setText("");
+    }//GEN-LAST:event_btnSndTnkActionPerformed
 
     @Override
     public void updateMessage(String message) {
@@ -207,4 +197,24 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
     public void sendPrivateMessage(String message) {
         txtTank.append(message + "\n");
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Msgtank;
+    private javax.swing.JButton btnLaser;
+    private javax.swing.JButton btnMissile;
+    private javax.swing.JButton btnRotate;
+    private javax.swing.JButton btnShoot;
+    private javax.swing.JButton btnSndTnk;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JLabel lblArea;
+    private javax.swing.JCheckBox potion;
+    private java.awt.TextArea txtTank;
+    // End of variables declaration//GEN-END:variables
+
 }

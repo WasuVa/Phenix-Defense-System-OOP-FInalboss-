@@ -112,14 +112,14 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="java.awt.TextArea" name="MsgHeli">
+        <Component class="java.awt.TextArea" name="txtHelli">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="32" y="201" width="666" height="190"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFieldHeli">
+        <Component class="javax.swing.JTextField" name="MsgHelli">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>

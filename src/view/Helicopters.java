@@ -18,6 +18,61 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         setTitle("Helicopter");
         setResizable(false);
     }
+    
+    
+@Override
+    public void updateMessage(String message) {
+        txtHelli.append(message + "\n");
+    }
+
+    @Override
+    public void clearArea(boolean clear) {
+        if (clear == true) {
+            lblArea.setText("Area Cleared");
+        } else {
+            lblArea.setText("Area Not Cleared");
+        }
+    }
+
+    @Override
+    public void buttonEnable(int value) {
+        if (ChkBHeli.isSelected() == true) {
+            sliderHeli.setValue(value);
+            lblArea.setText(value + "");
+            if (value >= 0 || 30 <= value) {
+                btnShtHeli.setEnabled(true);
+                btnMissHeli.setEnabled(false);
+                btnLOHeli.setEnabled(false);
+            }
+            if (value >= 31 || 60 <= value) {
+                btnLOHeli.setEnabled(true);
+                btnShtHeli.setEnabled(false);
+                btnMissHeli.setEnabled(false);
+            }
+            if (value >= 61) {
+                btnMissHeli.setEnabled(true);
+                btnLOHeli.setEnabled(false);
+                btnShtHeli.setEnabled(false);
+            }
+        }
+    }
+
+    public String getSoldierCount() {
+        return soldirsCount + "";
+    }
+
+    public String getAmmoCount() {
+        return ammo + "";
+    }
+
+    public String getPosition() {
+        return sliderHeli.getValue() + "";
+    }
+
+    public void sendPrivateMessage(String message) {
+        txtHelli.append(message + "\n");
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,8 +84,8 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         btnMissHeli = new javax.swing.JButton();
         btnShtHeli = new javax.swing.JButton();
         btnLOHeli = new javax.swing.JButton();
-        MsgHeli = new java.awt.TextArea();
-        txtFieldHeli = new javax.swing.JTextField();
+        txtHelli = new java.awt.TextArea();
+        MsgHelli = new javax.swing.JTextField();
         btnSndHeli = new javax.swing.JButton();
         ChkBHeli = new javax.swing.JCheckBox();
         jSpinner1 = new javax.swing.JSpinner();
@@ -66,10 +121,10 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         btnLOHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLOHeli.setText("Laser Operation");
         jPanel1.add(btnLOHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 187, 41));
-        jPanel1.add(MsgHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 201, 666, 190));
+        jPanel1.add(txtHelli, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 201, 666, 190));
 
-        txtFieldHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(txtFieldHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 580, -1));
+        MsgHelli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(MsgHelli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 580, -1));
 
         btnSndHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSndHeli.setForeground(new java.awt.Color(0, 0, 0));
@@ -122,7 +177,9 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSndHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndHeliActionPerformed
-
+        mainController.getHelicoperMessage(txtHelli.getText());
+        txtHelli.append(MsgHelli.getText()+"\n");
+        txtHelli.setText("");
     }//GEN-LAST:event_btnSndHeliActionPerformed
 
     private void ChkBHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkBHeliActionPerformed
@@ -132,7 +189,7 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ChkBHeli;
-    private java.awt.TextArea MsgHeli;
+    private javax.swing.JTextField MsgHelli;
     private javax.swing.JButton btnLOHeli;
     private javax.swing.JButton btnMissHeli;
     private javax.swing.JButton btnShtHeli;
@@ -145,61 +202,6 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblArea;
     private javax.swing.JSlider sliderHeli;
-    private javax.swing.JTextField txtFieldHeli;
+    private java.awt.TextArea txtHelli;
     // End of variables declaration//GEN-END:variables
-
-@Override
-    public void updateMessage(String message) {
-        MsgHeli.append(message + "\n");
-    }
-
-    @Override
-    public void clearArea(boolean clear) {
-        if (clear == true) {
-            lblArea.setText("Area Cleared");
-        } else {
-            lblArea.setText("Area Not Cleared");
-        }
-    }
-
-    @Override
-    public void buttonEnable(int value) {
-        if (ChkBHeli.isSelected() == true) {
-            sliderHeli.setValue(value);
-            lblArea.setText(value + "");
-            if (value >= 0 || 30 <= value) {
-                btnShtHeli.setEnabled(true);
-                btnMissHeli.setEnabled(false);
-                btnLOHeli.setEnabled(false);
-            }
-            if (value >= 31 || 60 <= value) {
-                btnLOHeli.setEnabled(true);
-                btnShtHeli.setEnabled(true);
-                btnMissHeli.setEnabled(false);
-            }
-
-            if (value >= 61) {
-                btnMissHeli.setEnabled(true);
-                btnLOHeli.setEnabled(true);
-                btnShtHeli.setEnabled(true);
-            }
-        }
-    }
-
-    public String getSoldierCount() {
-        return soldirsCount + "";
-    }
-
-    public String getAmmoCount() {
-        return ammo + "";
-    }
-
-    public String getPosition() {
-        return sliderHeli.getValue() + "";
-    }
-
-    public void sendPrivateMessage(String message) {
-        MsgHeli.append(message + "\n");
-    }
 }
-    

@@ -19,7 +19,6 @@ import model.DefenseObserver;
         setLocationRelativeTo(this);
         this.mainController = mainController;
         this.controller = controller;
-        txtASub.setEditable(false);
         btnLO.setEnabled(false);
         btnMO.setEnabled(false);
         btnsht.setEnabled(false);
@@ -100,7 +99,7 @@ import model.DefenseObserver;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnSndSub = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        Msgsub = new javax.swing.JTextField();
         txtASub = new java.awt.TextArea();
         checkBox = new javax.swing.JCheckBox();
         jSpinner1 = new javax.swing.JSpinner();
@@ -142,10 +141,15 @@ import model.DefenseObserver;
         btnSndSub.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSndSub.setForeground(new java.awt.Color(0, 0, 0));
         btnSndSub.setText("Send");
+        btnSndSub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSndSubActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSndSub, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 410, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 528, -1));
+        Msgsub.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(Msgsub, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 528, -1));
         jPanel1.add(txtASub, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 610, 170));
 
         checkBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -199,7 +203,14 @@ import model.DefenseObserver;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSndSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndSubActionPerformed
+        mainController.getHelicoperMessage(txtASub.getText());
+        txtASub.append(Msgsub.getText()+"\n");
+        txtASub.setText("");
+    }//GEN-LAST:event_btnSndSubActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Msgsub;
     private javax.swing.JButton btnLO;
     private javax.swing.JButton btnMO;
     private javax.swing.JButton btnRS;
@@ -216,7 +227,6 @@ import model.DefenseObserver;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblArea;
     private java.awt.TextArea txtASub;
     // End of variables declaration//GEN-END:variables

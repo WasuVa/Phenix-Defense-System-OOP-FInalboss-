@@ -53,16 +53,6 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         txtMsgViewer.append(text + "\n");
     }
 
-    public void playSound(String path) {
-        try {
-            AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getResource(path));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
-        } catch (Exception ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -251,9 +241,11 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnArmy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArmy1ActionPerformed
+        this.dispose();
         helicopter.setVisible(true);
         submarine.setVisible(true);
         tank.setVisible(true);
+        this.setVisible(true);
     }//GEN-LAST:event_btnArmy1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
