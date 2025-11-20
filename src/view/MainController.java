@@ -20,6 +20,8 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
 
     public MainController(Controller controller) {
         initComponents();
+        this.setResizable(false);
+        setTitle("HQ");
         this.controller = controller;
         submarine = new Submarine(controller, this);
         tank = new Tank(controller, this);
@@ -78,7 +80,8 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         txtMsgViewerII = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtMsgViewer = new javax.swing.JTextArea();
-        btnArmy1 = new javax.swing.JButton();
+        btnArmy = new javax.swing.JButton();
+        ArmyColse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,6 +110,11 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox2.setText("Area Clear");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, -1, -1));
 
         btnSndMain.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -183,15 +191,25 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 340, 160));
 
-        btnArmy1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnArmy1.setForeground(new java.awt.Color(0, 0, 0));
-        btnArmy1.setText("ARMY");
-        btnArmy1.addActionListener(new java.awt.event.ActionListener() {
+        btnArmy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnArmy.setForeground(new java.awt.Color(0, 0, 0));
+        btnArmy.setText("ARMY");
+        btnArmy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnArmy1ActionPerformed(evt);
+                btnArmyActionPerformed(evt);
             }
         });
-        jPanel1.add(btnArmy1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 100, -1));
+        jPanel1.add(btnArmy, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 100, -1));
+
+        ArmyColse.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ArmyColse.setForeground(new java.awt.Color(0, 0, 0));
+        ArmyColse.setText("Close");
+        ArmyColse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArmyColseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ArmyColse, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,20 +233,20 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
             controller.updateUnites(message);
             txtMsgMain.setText("");
         } else {
-            if (bropBoxMC.getSelectedIndex() == 1) {
+            if (bropBoxMC.getSelectedIndex() == 1 && checkMC.isSelected()) {
                 helicopter.updateMessage(message);
                 txtMsgMain.setText("");
-                txtMsgViewerII.append(message + "\n");
+                txtMsgViewerII.append("To Heli - "+message + "\n");
             }
-            if (bropBoxMC.getSelectedIndex() == 2) {
+            if (bropBoxMC.getSelectedIndex() == 2 && checkMC.isSelected()) {
                 tank.updateMessage(message);
                 txtMsgMain.setText("");
-                txtMsgViewerII.append(message + "\n");
+                txtMsgViewerII.append("To Tank - "+message + "\n");
             }
-            if (bropBoxMC.getSelectedIndex() == 3) {
+            if (bropBoxMC.getSelectedIndex() == 3 && checkMC.isSelected()) {
                 submarine.updateMessage(message);
                 txtMsgMain.setText("");
-                txtMsgViewerII.append(message + "\n");
+                txtMsgViewerII.append("To Sub - "+message + "\n");
             }
         }
     }//GEN-LAST:event_btnSndMainActionPerformed
@@ -240,17 +258,32 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         tank.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void btnArmy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArmy1ActionPerformed
-        this.dispose();
-        helicopter.setVisible(true);
-        submarine.setVisible(true);
-        tank.setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_btnArmy1ActionPerformed
+    private void ArmyColseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArmyColseActionPerformed
+            helicopter.dispose();
+            submarine.dispose();
+            tank.dispose();
+            btnArmy.setVisible(true);
+            ArmyColse.setVisible(false);
+    }//GEN-LAST:event_ArmyColseActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+
+        controller.sendAreaClearMessage(jCheckBox2.isSelected());
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void btnArmyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArmyActionPerformed
+            ArmyColse.setVisible(true);
+            btnArmy.setVisible(false);
+            helicopter.setVisible(true);
+            submarine.setVisible(true);
+            tank.setVisible(true);
+            this.setVisible(true);
+    }//GEN-LAST:event_btnArmyActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ArmyColse;
     private javax.swing.JComboBox<String> bropBoxMC;
-    private javax.swing.JButton btnArmy1;
+    private javax.swing.JButton btnArmy;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSndMain;
     private javax.swing.JCheckBox checkMC;

@@ -17,8 +17,8 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         setLocationRelativeTo(this);
         setTitle("Helicopter");
         setResizable(false);
+        
     }
-    
     
 @Override
     public void updateMessage(String message) {
@@ -28,9 +28,13 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
     @Override
     public void clearArea(boolean clear) {
         if (clear == true) {
-            lblArea.setText("Area Cleared");
+            lblWorn.setText("Area Cleared");
+            redpnl.setVisible(false);
+            greenpnl.setVisible(true);
         } else {
-            lblArea.setText("Area Not Cleared");
+            lblWorn.setText("Area Not Cleared");
+            redpnl.setVisible(true);
+            greenpnl.setVisible(false);
         }
     }
 
@@ -38,7 +42,7 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
     public void buttonEnable(int value) {
         if (ChkBHeli.isSelected() == true) {
             sliderHeli.setValue(value);
-            lblArea.setText(value + "");
+            lblWorn.setText(value + "");
             if (value >= 0 || 30 <= value) {
                 btnShtHeli.setEnabled(true);
                 btnMissHeli.setEnabled(false);
@@ -80,12 +84,11 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
 
         jPanel1 = new javax.swing.JPanel();
         sliderHeli = new javax.swing.JSlider();
-        lblArea = new javax.swing.JLabel();
+        lblWorn = new javax.swing.JLabel();
         btnMissHeli = new javax.swing.JButton();
         btnShtHeli = new javax.swing.JButton();
         btnLOHeli = new javax.swing.JButton();
         txtHelli = new java.awt.TextArea();
-        MsgHelli = new javax.swing.JTextField();
         btnSndHeli = new javax.swing.JButton();
         ChkBHeli = new javax.swing.JCheckBox();
         jSpinner1 = new javax.swing.JSpinner();
@@ -93,6 +96,9 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        redpnl = new javax.swing.JPanel();
+        greenpnl = new javax.swing.JPanel();
+        MsgHeli = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Helicopter");
@@ -105,10 +111,11 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         sliderHeli.setValue(0);
         jPanel1.add(sliderHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 37, -1, 440));
 
-        lblArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblArea.setForeground(new java.awt.Color(0, 0, 0));
-        lblArea.setText("Area Not Cleard");
-        jPanel1.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
+        lblWorn.setBackground(new java.awt.Color(255, 51, 0));
+        lblWorn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblWorn.setForeground(new java.awt.Color(0, 0, 0));
+        lblWorn.setText("Area Not Cleard");
+        jPanel1.add(lblWorn, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 205, -1));
 
         btnMissHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMissHeli.setText("Missile Operation");
@@ -122,9 +129,6 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         btnLOHeli.setText("Laser Operation");
         jPanel1.add(btnLOHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 187, 41));
         jPanel1.add(txtHelli, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 201, 666, 190));
-
-        MsgHelli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(MsgHelli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 580, -1));
 
         btnSndHeli.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSndHeli.setForeground(new java.awt.Color(0, 0, 0));
@@ -161,6 +165,37 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bakcImg.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 100));
 
+        redpnl.setBackground(new java.awt.Color(204, 0, 0));
+
+        javax.swing.GroupLayout redpnlLayout = new javax.swing.GroupLayout(redpnl);
+        redpnl.setLayout(redpnlLayout);
+        redpnlLayout.setHorizontalGroup(
+            redpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        redpnlLayout.setVerticalGroup(
+            redpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(redpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 140, 30));
+
+        greenpnl.setBackground(new java.awt.Color(0, 204, 51));
+
+        javax.swing.GroupLayout greenpnlLayout = new javax.swing.GroupLayout(greenpnl);
+        greenpnl.setLayout(greenpnlLayout);
+        greenpnlLayout.setHorizontalGroup(
+            greenpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+        greenpnlLayout.setVerticalGroup(
+            greenpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(greenpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 90, -1));
+        jPanel1.add(MsgHeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 426, 590, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,9 +212,9 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSndHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndHeliActionPerformed
-        mainController.getHelicoperMessage(txtHelli.getText());
-        txtHelli.append(MsgHelli.getText()+"\n");
-        txtHelli.setText("");
+        mainController.getHelicoperMessage(MsgHeli.getText());
+        txtHelli.append("Me :"+MsgHeli.getText()+"\n");
+        MsgHeli.setText("");
     }//GEN-LAST:event_btnSndHeliActionPerformed
 
     private void ChkBHeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkBHeliActionPerformed
@@ -189,18 +224,20 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ChkBHeli;
-    private javax.swing.JTextField MsgHelli;
+    private javax.swing.JTextField MsgHeli;
     private javax.swing.JButton btnLOHeli;
     private javax.swing.JButton btnMissHeli;
     private javax.swing.JButton btnShtHeli;
     private javax.swing.JButton btnSndHeli;
+    private javax.swing.JPanel greenpnl;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblWorn;
+    private javax.swing.JPanel redpnl;
     private javax.swing.JSlider sliderHeli;
     private java.awt.TextArea txtHelli;
     // End of variables declaration//GEN-END:variables

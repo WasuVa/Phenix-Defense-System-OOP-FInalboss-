@@ -10,11 +10,11 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
     private int soldirsCount;
     private int ammo;
     private int fuel = 100;
-    private boolean engineRunning;
 
     public Tank(Controller controller, MainController mainController) {
         initComponents();
         setLocationRelativeTo(this);
+        this.setResizable(false);
         this.controller = controller;
         this.mainController = mainController;
         btnShoot.setEnabled(false);
@@ -44,6 +44,8 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         Msgtank = new javax.swing.JTextField();
         btnRotate = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        redpnl = new javax.swing.JPanel();
+        greenpnl = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tank");
@@ -86,7 +88,7 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         jSlider1.setValue(0);
         jPanel1.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, 398));
 
-        lblArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblArea.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblArea.setForeground(new java.awt.Color(0, 0, 0));
         lblArea.setText("Area Not Cleard");
         jPanel1.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 205, -1));
@@ -110,6 +112,36 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bakcImg.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 100));
 
+        redpnl.setBackground(new java.awt.Color(204, 0, 0));
+
+        javax.swing.GroupLayout redpnlLayout = new javax.swing.GroupLayout(redpnl);
+        redpnl.setLayout(redpnlLayout);
+        redpnlLayout.setHorizontalGroup(
+            redpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        redpnlLayout.setVerticalGroup(
+            redpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(redpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 140, 30));
+
+        greenpnl.setBackground(new java.awt.Color(0, 204, 51));
+
+        javax.swing.GroupLayout greenpnlLayout = new javax.swing.GroupLayout(greenpnl);
+        greenpnl.setLayout(greenpnlLayout);
+        greenpnlLayout.setHorizontalGroup(
+            greenpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+        greenpnlLayout.setVerticalGroup(
+            greenpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(greenpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 90, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,9 +157,9 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSndTnkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndTnkActionPerformed
-        mainController.getHelicoperMessage(txtTank.getText());
-        txtTank.append(Msgtank.getText()+"\n");
-        txtTank.setText("");
+        mainController.getHelicoperMessage(Msgtank.getText());
+        txtTank.append("Me :"+Msgtank.getText()+"\n");
+        Msgtank.setText("");
     }//GEN-LAST:event_btnSndTnkActionPerformed
 
     @Override
@@ -139,8 +171,12 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
     public void clearArea(boolean clear) {
         if (clear == true) {
             lblArea.setText("Area Cleared");
+            redpnl.setVisible(false);
+            greenpnl.setVisible(true);
         } else {
             lblArea.setText("Area Not Cleared");
+            redpnl.setVisible(true);
+            greenpnl.setVisible(false);
         }
     }
 
@@ -205,6 +241,7 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
     private javax.swing.JButton btnRotate;
     private javax.swing.JButton btnShoot;
     private javax.swing.JButton btnSndTnk;
+    private javax.swing.JPanel greenpnl;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -214,6 +251,7 @@ public class Tank extends javax.swing.JFrame implements DefenseObserver{
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblArea;
     private javax.swing.JCheckBox potion;
+    private javax.swing.JPanel redpnl;
     private java.awt.TextArea txtTank;
     // End of variables declaration//GEN-END:variables
 

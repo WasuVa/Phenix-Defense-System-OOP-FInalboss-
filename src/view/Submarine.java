@@ -4,6 +4,7 @@ import controller.Controller;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.sound.sampled.Clip;
+import javax.swing.JOptionPane;
 import model.DefenseObserver;
 
     public class Submarine extends javax.swing.JFrame implements DefenseObserver {
@@ -17,6 +18,7 @@ import model.DefenseObserver;
     public Submarine(Controller controller, MainController mainController) {
         initComponents();
         setLocationRelativeTo(this);
+        this.setResizable(false);
         this.mainController = mainController;
         this.controller = controller;
         btnLO.setEnabled(false);
@@ -34,8 +36,12 @@ import model.DefenseObserver;
     public void clearArea(boolean clear) {
         if (clear == true) {
             lblArea.setText("Area Cleared");
+            redpnl.setVisible(false);
+            greenpnl.setVisible(true);
         } else {
             lblArea.setText("Area Not Cleared");
+            redpnl.setVisible(true);
+            greenpnl.setVisible(false);
         }
     }
 
@@ -102,15 +108,15 @@ import model.DefenseObserver;
         Msgsub = new javax.swing.JTextField();
         txtASub = new java.awt.TextArea();
         checkBox = new javax.swing.JCheckBox();
-        jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btnRS = new javax.swing.JButton();
         lblArea = new javax.swing.JLabel();
         btnMO = new javax.swing.JButton();
         btnLO = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        redpnl = new javax.swing.JPanel();
+        greenpnl = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Submarine");
@@ -155,8 +161,7 @@ import model.DefenseObserver;
         checkBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         checkBox.setForeground(new java.awt.Color(0, 0, 0));
         checkBox.setText("Position");
-        jPanel1.add(checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(453, 130, -1, -1));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 98, 49, -1));
+        jPanel1.add(checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 64, 49, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -164,16 +169,11 @@ import model.DefenseObserver;
         jLabel3.setText("Solder Count");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 64, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Ammo Count");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(453, 96, -1, -1));
-
         btnRS.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnRS.setText("Rotate Shooting");
         jPanel1.add(btnRS, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 187, 41));
 
-        lblArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblArea.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblArea.setForeground(new java.awt.Color(0, 0, 0));
         lblArea.setText("Area Not Cleard");
         jPanel1.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 205, -1));
@@ -188,6 +188,36 @@ import model.DefenseObserver;
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bakcImg.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 100));
+
+        redpnl.setBackground(new java.awt.Color(204, 0, 0));
+
+        javax.swing.GroupLayout redpnlLayout = new javax.swing.GroupLayout(redpnl);
+        redpnl.setLayout(redpnlLayout);
+        redpnlLayout.setHorizontalGroup(
+            redpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        redpnlLayout.setVerticalGroup(
+            redpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(redpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 140, 30));
+
+        greenpnl.setBackground(new java.awt.Color(0, 204, 51));
+
+        javax.swing.GroupLayout greenpnlLayout = new javax.swing.GroupLayout(greenpnl);
+        greenpnl.setLayout(greenpnlLayout);
+        greenpnlLayout.setHorizontalGroup(
+            greenpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+        greenpnlLayout.setVerticalGroup(
+            greenpnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(greenpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,9 +234,13 @@ import model.DefenseObserver;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSndSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSndSubActionPerformed
-        mainController.getHelicoperMessage(txtASub.getText());
-        txtASub.append(Msgsub.getText()+"\n");
-        txtASub.setText("");
+        if (Msgsub.getText().isEmpty()) {
+            
+        }else{
+            mainController.getHelicoperMessage(Msgsub.getText());
+            txtASub.append("Me :"+Msgsub.getText()+"\n");
+            Msgsub.setText("");
+        }
     }//GEN-LAST:event_btnSndSubActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,17 +251,17 @@ import model.DefenseObserver;
     private javax.swing.JButton btnSndSub;
     private javax.swing.JButton btnsht;
     private javax.swing.JCheckBox checkBox;
+    private javax.swing.JPanel greenpnl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblArea;
+    private javax.swing.JPanel redpnl;
     private java.awt.TextArea txtASub;
     // End of variables declaration//GEN-END:variables
  }
