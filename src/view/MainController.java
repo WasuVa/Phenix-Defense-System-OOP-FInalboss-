@@ -1,11 +1,6 @@
 package view;
 
 import controller.Controller;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import model.DefenseObserver;
 import view.Submarine;
 import view.Tank;
@@ -65,7 +60,7 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         checkMC = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         btnSndMain = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
+        sliderMC = new javax.swing.JSlider();
         txtMsgMain = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -127,10 +122,15 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         });
         jPanel1.add(btnSndMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
 
-        jSlider1.setPaintLabels(true);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setValue(0);
-        jPanel1.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 379, -1));
+        sliderMC.setPaintLabels(true);
+        sliderMC.setPaintTicks(true);
+        sliderMC.setValue(0);
+        sliderMC.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderMCStateChanged(evt);
+            }
+        });
+        jPanel1.add(sliderMC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 379, -1));
 
         txtMsgMain.setBackground(new java.awt.Color(204, 204, 204));
         txtMsgMain.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -280,6 +280,11 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
             this.setVisible(true);
     }//GEN-LAST:event_btnArmyActionPerformed
 
+    private void sliderMCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderMCStateChanged
+        int value = sliderMC.getValue();
+        controller.enableButtons(value);
+    }//GEN-LAST:event_sliderMCStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ArmyColse;
     private javax.swing.JComboBox<String> bropBoxMC;
@@ -300,7 +305,7 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider sliderMC;
     private javax.swing.JTextField txtMsgMain;
     private javax.swing.JTextArea txtMsgViewer;
     private javax.swing.JTextArea txtMsgViewerII;

@@ -23,7 +23,7 @@ import model.DefenseObserver;
         this.controller = controller;
         btnLO.setEnabled(false);
         btnMO.setEnabled(false);
-        btnsht.setEnabled(false);
+        btnshoot.setEnabled(false);
         btnRS.setEnabled(false);
     }
 
@@ -48,32 +48,30 @@ import model.DefenseObserver;
     @Override
     public void buttonEnable(int value) {
         if (checkBox.isSelected() == true) {
-            jLabel1.setText(value + "");
-            if (value >= 0 || 25 <= value) {
-                btnsht.setEnabled(true);
+            if (value<=25) {
+                lblWorn.setText("LOW");
+            }else if (value<=65) {
+                lblWorn.setText("MEDIUM");
+            }else{
+                lblWorn.setText("CRITICAL");
+            }
+            if (value >= 0 || 30 <= value) {
+                btnshoot.setEnabled(true);
+                btnRS.setEnabled(true);
                 btnLO.setEnabled(false);
                 btnMO.setEnabled(false);
-                btnRS.setEnabled(false);
             }
-            if (value >= 26 || 50 <= value) {
-                btnsht.setEnabled(true);
+            if (value >= 31 || 65 <= value) {
+                btnshoot.setEnabled(true);
+                btnRS.setEnabled(true);
                 btnLO.setEnabled(true);
                 btnMO.setEnabled(false);
-                btnRS.setEnabled(false);
             }
-
-            if (value >= 51 || 75 <= value) {
-                btnsht.setEnabled(true);
-                btnLO.setEnabled(true);
-                btnMO.setEnabled(true);
-                btnRS.setEnabled(false);
-            }
-
-            if (value >= 76) {
-                btnsht.setEnabled(true);
-                btnLO.setEnabled(true);
-                btnMO.setEnabled(true);
+            if (value >= 65) {
+                btnshoot.setEnabled(true);
                 btnRS.setEnabled(true);
+                btnLO.setEnabled(true);
+                btnMO.setEnabled(true);
             }
         }
     }
@@ -99,7 +97,7 @@ import model.DefenseObserver;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnsht = new javax.swing.JButton();
+        btnshoot = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jSlider2 = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
@@ -117,6 +115,7 @@ import model.DefenseObserver;
         jLabel7 = new javax.swing.JLabel();
         redpnl = new javax.swing.JPanel();
         greenpnl = new javax.swing.JPanel();
+        lblWorn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Submarine");
@@ -124,9 +123,9 @@ import model.DefenseObserver;
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnsht.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnsht.setText("Shoot");
-        jPanel1.add(btnsht, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 187, 41));
+        btnshoot.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnshoot.setText("Shoot");
+        jPanel1.add(btnshoot, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 187, 41));
 
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setValue(0);
@@ -161,7 +160,7 @@ import model.DefenseObserver;
         checkBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         checkBox.setForeground(new java.awt.Color(0, 0, 0));
         checkBox.setText("Position");
-        jPanel1.add(checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
+        jPanel1.add(checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 64, 49, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -219,6 +218,11 @@ import model.DefenseObserver;
 
         jPanel1.add(greenpnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 90, -1));
 
+        lblWorn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblWorn.setForeground(new java.awt.Color(0, 0, 0));
+        lblWorn.setText("--------");
+        jPanel1.add(lblWorn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 205, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,7 +253,7 @@ import model.DefenseObserver;
     private javax.swing.JButton btnMO;
     private javax.swing.JButton btnRS;
     private javax.swing.JButton btnSndSub;
-    private javax.swing.JButton btnsht;
+    private javax.swing.JButton btnshoot;
     private javax.swing.JCheckBox checkBox;
     private javax.swing.JPanel greenpnl;
     private javax.swing.JLabel jLabel1;
@@ -261,6 +265,7 @@ import model.DefenseObserver;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblWorn;
     private javax.swing.JPanel redpnl;
     private java.awt.TextArea txtASub;
     // End of variables declaration//GEN-END:variables
