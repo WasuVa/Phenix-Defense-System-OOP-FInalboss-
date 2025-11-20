@@ -105,6 +105,20 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
         jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox2.setText("Area Clear");
+        jCheckBox2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                jCheckBox2AncestorRemoved(evt);
+            }
+        });
+        jCheckBox2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox2StateChanged(evt);
+            }
+        });
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox2ActionPerformed(evt);
@@ -267,8 +281,8 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
     }//GEN-LAST:event_ArmyColseActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-
         controller.sendAreaClearMessage(jCheckBox2.isSelected());
+        helicopter.buttonoff();
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void btnArmyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArmyActionPerformed
@@ -281,9 +295,17 @@ public class MainController extends javax.swing.JFrame implements DefenseObserve
     }//GEN-LAST:event_btnArmyActionPerformed
 
     private void sliderMCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderMCStateChanged
-        int value = sliderMC.getValue();
-        controller.enableButtons(value);
+            int value = sliderMC.getValue();
+            controller.enableButtons(value);
     }//GEN-LAST:event_sliderMCStateChanged
+
+    private void jCheckBox2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox2StateChanged
+        
+    }//GEN-LAST:event_jCheckBox2StateChanged
+
+    private void jCheckBox2AncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jCheckBox2AncestorRemoved
+        
+    }//GEN-LAST:event_jCheckBox2AncestorRemoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ArmyColse;

@@ -113,6 +113,8 @@
             <Property name="text" type="java.lang.String" value="Area Clear"/>
           </Properties>
           <Events>
+            <EventHandler event="ancestorRemoved" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jCheckBox2AncestorRemoved"/>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jCheckBox2StateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox2ActionPerformed"/>
           </Events>
           <Constraints>

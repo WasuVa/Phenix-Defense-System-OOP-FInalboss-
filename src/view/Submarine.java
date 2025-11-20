@@ -23,8 +23,6 @@ import model.DefenseObserver;
         this.controller = controller;
         btnLO.setEnabled(false);
         btnMO.setEnabled(false);
-        btnshoot.setEnabled(false);
-        btnRS.setEnabled(false);
     }
 
     @Override
@@ -56,20 +54,15 @@ import model.DefenseObserver;
                 lblWorn.setText("CRITICAL");
             }
             if (value >= 0 || 30 <= value) {
-                btnshoot.setEnabled(true);
-                btnRS.setEnabled(true);
                 btnLO.setEnabled(false);
                 btnMO.setEnabled(false);
             }
             if (value >= 31 || 65 <= value) {
-                btnshoot.setEnabled(true);
-                btnRS.setEnabled(true);
+
                 btnLO.setEnabled(true);
                 btnMO.setEnabled(false);
             }
             if (value >= 65) {
-                btnshoot.setEnabled(true);
-                btnRS.setEnabled(true);
                 btnLO.setEnabled(true);
                 btnMO.setEnabled(true);
             }
@@ -97,7 +90,6 @@ import model.DefenseObserver;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnshoot = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jSlider2 = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
@@ -106,9 +98,6 @@ import model.DefenseObserver;
         Msgsub = new javax.swing.JTextField();
         txtASub = new java.awt.TextArea();
         checkBox = new javax.swing.JCheckBox();
-        jSpinner2 = new javax.swing.JSpinner();
-        jLabel3 = new javax.swing.JLabel();
-        btnRS = new javax.swing.JButton();
         lblArea = new javax.swing.JLabel();
         btnMO = new javax.swing.JButton();
         btnLO = new javax.swing.JButton();
@@ -116,16 +105,16 @@ import model.DefenseObserver;
         redpnl = new javax.swing.JPanel();
         greenpnl = new javax.swing.JPanel();
         lblWorn = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        msilspiner = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
+        btryspiner = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Submarine");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnshoot.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnshoot.setText("Shoot");
-        jPanel1.add(btnshoot, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 187, 41));
 
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setValue(0);
@@ -160,17 +149,7 @@ import model.DefenseObserver;
         checkBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         checkBox.setForeground(new java.awt.Color(0, 0, 0));
         checkBox.setText("Position");
-        jPanel1.add(checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
-        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 64, 49, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Solder Count");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 64, -1, -1));
-
-        btnRS.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnRS.setText("Rotate Shooting");
-        jPanel1.add(btnRS, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 187, 41));
+        jPanel1.add(checkBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
 
         lblArea.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblArea.setForeground(new java.awt.Color(0, 0, 0));
@@ -179,11 +158,11 @@ import model.DefenseObserver;
 
         btnMO.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMO.setText("Missile Operation");
-        jPanel1.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 187, 41));
+        jPanel1.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 187, 41));
 
         btnLO.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLO.setText("Laser Operation");
-        jPanel1.add(btnLO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 187, 41));
+        jPanel1.add(btnLO, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 187, 41));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/bakcImg.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 100));
@@ -223,6 +202,18 @@ import model.DefenseObserver;
         lblWorn.setText("--------");
         jPanel1.add(lblWorn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 205, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Missile Count");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
+        jPanel1.add(msilspiner, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 49, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Battry Capacity");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
+        jPanel1.add(btryspiner, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 49, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,21 +242,21 @@ import model.DefenseObserver;
     private javax.swing.JTextField Msgsub;
     private javax.swing.JButton btnLO;
     private javax.swing.JButton btnMO;
-    private javax.swing.JButton btnRS;
     private javax.swing.JButton btnSndSub;
-    private javax.swing.JButton btnshoot;
+    private javax.swing.JSpinner btryspiner;
     private javax.swing.JCheckBox checkBox;
     private javax.swing.JPanel greenpnl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblWorn;
+    private javax.swing.JSpinner msilspiner;
     private javax.swing.JPanel redpnl;
     private java.awt.TextArea txtASub;
     // End of variables declaration//GEN-END:variables

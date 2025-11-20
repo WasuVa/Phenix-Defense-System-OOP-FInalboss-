@@ -17,7 +17,9 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
         setTitle("Helicopter");
         setResizable(false);
         ammoSpin.setValue(1000);
-        
+        btnLOHeli.setEnabled(false);
+        btnMissHeli.setEnabled(false);
+        btnShtHeli1.setEnabled(false);
     }
     
 @Override
@@ -291,7 +293,13 @@ public class Helicopters extends javax.swing.JFrame implements DefenseObserver{
             btnMissHeli.setEnabled(false);
         }
     }//GEN-LAST:event_btnMissHeliActionPerformed
-
+    
+    public boolean buttonoff(){
+        btnShtHeli1.setEnabled(false);
+        btnMissHeli.setEnabled(false);
+        btnLOHeli.setEnabled(false);
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ChkBHeli;
